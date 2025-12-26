@@ -1,83 +1,131 @@
 import { useEffect, useState } from "react";
 import "./About.css";
 
-const cards = [
+const sections = [
   {
-    title: "Our Mission",
-    text: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    sectionTitle: "Our Vision",
+    cards: [
+      {
+        title: "Vision",
+        text: "To empower the OBC community through equality, justice, and development so they can lead in every sphere of society."
+      }
+    ]
   },
   {
-    title: "Our Vision",
-    text: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    sectionTitle: "Our Mission",
+    cards: [
+      {
+        title: "Mission",
+        text: "To protect the rights of the OBC community and work with government and society for their holistic development."
+      }
+    ]
   },
   {
-    title: "Our Work",
-    text: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-  },
-  {
-    title: "Community Strength",
-    text: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    sectionTitle: "Our Objectives",
+    cards: [
+      {
+        title: "Women Empowerment",
+        text: "Promoting education, health, leadership, and economic independence of women in the OBC community."
+      },
+      {
+        title: "Economic Empowerment",
+        text: "Supporting entrepreneurship and access to government financial schemes."
+      },
+      {
+        title: "Educational Support",
+        text: "Ensuring scholarships, hostels, skill development, and career guidance."
+      },
+      {
+        title: "Health & Welfare",
+        text: "Health awareness campaigns, medical camps, and access to schemes."
+      },
+      {
+        title: "Legal Assistance",
+        text: "Providing free legal aid for land disputes and caste-based atrocities."
+      }
+    ]
   }
 ];
 
 function About() {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [sectionIndex, setSectionIndex] = useState(0);
+  const [cardIndex, setCardIndex] = useState(0);
 
-  // Auto-slide
+  const currentSection = sections[sectionIndex];
+  const cards = currentSection.cards;
+
+  // Auto-slide logic (SMART, not dumb)
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % cards.length);
+      if (cardIndex < cards.length - 1) {
+        setCardIndex(cardIndex + 1);
+      } else {
+        // move to next section
+        setSectionIndex((sectionIndex + 1) % sections.length);
+        setCardIndex(0);
+      }
     }, 4000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [cardIndex, cards.length, sectionIndex]);
 
   const prev = () => {
-    setActiveIndex((prev) =>
-      prev === 0 ? cards.length - 1 : prev - 1
-    );
+    if (cardIndex > 0) {
+      setCardIndex(cardIndex - 1);
+    } else {
+      const prevSection =
+        sectionIndex === 0 ? sections.length - 1 : sectionIndex - 1;
+      setSectionIndex(prevSection);
+      setCardIndex(sections[prevSection].cards.length - 1);
+    }
   };
 
   const next = () => {
-    setActiveIndex((prev) =>
-      (prev + 1) % cards.length
-    );
+    if (cardIndex < cards.length - 1) {
+      setCardIndex(cardIndex + 1);
+    } else {
+      setSectionIndex((sectionIndex + 1) % sections.length);
+      setCardIndex(0);
+    }
   };
 
   return (
     <section id="about" className="about-section">
       <h2 className="about-title">About Us</h2>
+      <h3 className="about-subtitle">{currentSection.sectionTitle}</h3>
 
       <div className="carousel-wrapper">
-        <button className="arrow left" onClick={prev}>
-         ‹
-        </button>
+        <button className="arrow left" onClick={prev}>‹</button>
 
         <div className="carousel">
-          {cards.map((card, index) => {
-            const offset = index - activeIndex;
+  {cards.map((card, index) => {
+    const isSingle = cards.length === 1;
+    const offset = index - cardIndex;
 
-            return (
-              <div
-                key={index}
-                className="card"
-                style={{
-                  transform: `translateX(${offset * 500}px) scale(${index === activeIndex ? 1 : 0.88})`,
-                  filter: index === activeIndex ? "none" : "blur(2px)",
-                  opacity: Math.abs(offset) > 2 ? 0 : 1,
-                  zIndex: index === activeIndex ? 2 : 1
-                }}
-              >
-                <h3>{card.title}</h3>
-                <p>{card.text}</p>
-              </div>
-            );
-          })}
-        </div>
+    return (
+      <div
+        key={index}
+        className={`card ${isSingle ? "card-full" : ""}`}
+        style={
+          isSingle
+            ? {}
+            : {
+                transform: `translateX(${offset * 520}px) scale(${index === cardIndex ? 1 : 0.9})`,
+                filter: index === cardIndex ? "none" : "blur(2px)",
+                opacity: Math.abs(offset) > 1 ? 0 : 1,
+                zIndex: index === cardIndex ? 2 : 1
+              }
+        }
+      >
+        <h3>{card.title}</h3>
+        <p>{card.text}</p>
+      </div>
+    );
+  })}
+</div>
 
-        <button className="arrow right" onClick={next}>
-          ›
-        </button>
+
+        <button className="arrow right" onClick={next}>›</button>
       </div>
     </section>
   );
