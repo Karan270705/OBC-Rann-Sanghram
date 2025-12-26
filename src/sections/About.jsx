@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import "./About.css";
-
+import visionImage from "../assets/our_vision.jpeg";
+import missionImage from "../assets/our_mission.jpeg";
 const sections = [
   {
     sectionTitle: "Our Vision",
     cards: [
       {
-        title: "Vision",
-        text: "To empower the OBC community through equality, justice, and development so they can lead in every sphere of society."
+        title: "Protect Constitutional Rights",
+        image: visionImage,
+        text: "Upholding the constitutional rights of the OBC community and ensuring justice, equality, and dignity for all."
       }
     ]
   },
@@ -15,8 +17,9 @@ const sections = [
     sectionTitle: "Our Mission",
     cards: [
       {
-        title: "Mission",
-        text: "To protect the rights of the OBC community and work with government and society for their holistic development."
+        title: "Our Mission",
+        image : missionImage,
+        text: "To protect OBC rights and work with government and society for holistic development."
       }
     ]
   },
@@ -54,14 +57,12 @@ function About() {
   const currentSection = sections[sectionIndex];
   const cards = currentSection.cards;
 
-  // Auto-slide logic (SMART, not dumb)
   useEffect(() => {
     const interval = setInterval(() => {
       if (cardIndex < cards.length - 1) {
-        setCardIndex(cardIndex + 1);
+        setCardIndex((prev) => prev + 1);
       } else {
-        // move to next section
-        setSectionIndex((sectionIndex + 1) % sections.length);
+        setSectionIndex((prev) => (prev + 1) % sections.length);
         setCardIndex(0);
       }
     }, 4000);
@@ -91,6 +92,8 @@ function About() {
 
   return (
     <section id="about" className="about-section">
+      <div className="about-overlay" />
+
       <h2 className="about-title">About Us</h2>
       <h3 className="about-subtitle">{currentSection.sectionTitle}</h3>
 
@@ -98,32 +101,39 @@ function About() {
         <button className="arrow left" onClick={prev}>‹</button>
 
         <div className="carousel">
-  {cards.map((card, index) => {
-    const isSingle = cards.length === 1;
-    const offset = index - cardIndex;
+          {cards.map((card, index) => {
+            const isSingle = cards.length === 1;
+            const offset = index - cardIndex;
 
-    return (
-      <div
-        key={index}
-        className={`card ${isSingle ? "card-full" : ""}`}
-        style={
-          isSingle
-            ? {}
-            : {
-                transform: `translateX(${offset * 520}px) scale(${index === cardIndex ? 1 : 0.9})`,
-                filter: index === cardIndex ? "none" : "blur(2px)",
-                opacity: Math.abs(offset) > 1 ? 0 : 1,
-                zIndex: index === cardIndex ? 2 : 1
-              }
-        }
-      >
-        <h3>{card.title}</h3>
-        <p>{card.text}</p>
-      </div>
-    );
-  })}
-</div>
+            return (
+              <div
+                key={index}
+                className={`card ${isSingle ? "card-full" : ""}`}
+                style={
+                  isSingle
+                    ? {}
+                    : {
+                        transform: `translateX(${offset * 520}px) scale(${index === cardIndex ? 1 : 0.9})`,
+                        filter: index === cardIndex ? "none" : "blur(2px)",
+                        opacity: Math.abs(offset) > 1 ? 0 : 1,
+                        zIndex: index === cardIndex ? 2 : 1
+                      }
+                }
+              >
+                {card.image && (
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className="card-image"
+                  />
+                )}
 
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </div>
+            );
+          })}
+        </div>
 
         <button className="arrow right" onClick={next}>›</button>
       </div>
