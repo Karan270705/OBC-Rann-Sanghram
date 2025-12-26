@@ -8,11 +8,9 @@
   overflow: hidden;
 }
 
-/* soft readable overlay */
 .about-overlay {
   position: absolute;
   inset: 0;
-  /* background: rgba(248, 248, 247, 0.92); */
   z-index: 0;
 }
 
@@ -26,9 +24,7 @@
 .about-title {
   text-align: center;
   font-size: 40px;
-  font-style: bold; 
-  margin-bottom: 20px;
-
+  margin-bottom: 15px;
 }
 
 .about-subtitle {
@@ -51,86 +47,85 @@
 .carousel {
   position: relative;
   width: 100%;
-  max-width: 1500px;
-  height: 620px;
+  max-width: 1600px;
+  height: 650px;
 }
 
+/* Base Card */
 .card {
   position: absolute;
   top: 50%;
   left: 50%;
-
-  width: 500px;
+  width: 520px;
   min-height: 520px;
   padding: 25px;
-
   background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
-
-  transform-origin: center;
+  border-radius: 16px;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.14);
   transition: transform 0.6s ease, filter 0.6s ease, opacity 0.6s ease;
   translate: -50% -50%;
 }
 
+/* Vision / Mission full card */
 .card-full {
   width: 100%;
-  max-width: 1350px; 
-  min-height: 560px;
-
-  left: 50%;
-  top: 50%;
-  translate: -50% -50%;
-
+  max-width: 1350px;
+  min-height: 580px;
+  padding: 40px 70px;
   transform: none !important;
   filter: none !important;
   opacity: 1 !important;
-
-  padding: 40px 70px;
 }
 
+/* 🔥 OBJECTIVES CARD – WIDER */
+.card-objective {
+  width: 1000px;
+  min-height: 540px;
+  padding: 30px 40px;
+}
+
+/* Image */
 .card-image {
   width: 100%;
-  height: 600px;
+  height: 650px;
   object-fit: cover;
   border-radius: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
-.card h3 {
+/* Center title for objectives */
+.card-title-center {
+  text-align: center;
+  font-size: 22px;
   margin-bottom: 14px;
-  font-size: 20px;
   color: #d32f2f;
 }
 
 .card p {
-  font-size: 15.5px;
+  font-size: 15.8px;
   line-height: 1.65;
   color: #333;
+  text-align: center;
 }
 
+/* Arrows */
 .arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 5;
-
   width: 44px;
   height: 44px;
   border-radius: 50%;
-
   background-color: #fffaf5;
   border: 2px solid #f57c00;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-size: 26px;
   font-weight: 600;
   color: #f57c00;
   cursor: pointer;
-
   transition: all 0.25s ease;
 }
 
@@ -153,7 +148,6 @@
   .arrow.left {
     left: -20px;
   }
-
   .arrow.right {
     right: -20px;
   }

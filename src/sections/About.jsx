@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "./About.css";
 import visionImage from "../assets/our_vision.jpeg";
 import missionImage from "../assets/our_mission.jpeg";
+import womenEmpowermentImage from "../assets/women.jpeg";
+
 const sections = [
   {
     sectionTitle: "Our Vision",
@@ -9,7 +11,8 @@ const sections = [
       {
         title: "Protect Constitutional Rights",
         image: visionImage,
-        text: "Upholding the constitutional rights of the OBC community and ensuring justice, equality, and dignity for all."
+        text:
+          "Upholding the constitutional rights of the OBC community and ensuring justice, equality, and dignity for all."
       }
     ]
   },
@@ -18,8 +21,9 @@ const sections = [
     cards: [
       {
         title: "Our Mission",
-        image : missionImage,
-        text: "To protect OBC rights and work with government and society for holistic development."
+        image: missionImage,
+        text:
+          "To protect OBC rights and work with government and society for holistic development."
       }
     ]
   },
@@ -28,23 +32,29 @@ const sections = [
     cards: [
       {
         title: "Women Empowerment",
-        text: "Promoting education, health, leadership, and economic independence of women in the OBC community."
+        image: womenEmpowermentImage,
+        text:
+          "Promoting education, health, leadership, and economic independence of women in the OBC community."
       },
       {
         title: "Economic Empowerment",
-        text: "Supporting entrepreneurship and access to government financial schemes."
+        text:
+          "Supporting entrepreneurship and access to government financial schemes."
       },
       {
         title: "Educational Support",
-        text: "Ensuring scholarships, hostels, skill development, and career guidance."
+        text:
+          "Ensuring scholarships, hostels, skill development, and career guidance."
       },
       {
         title: "Health & Welfare",
-        text: "Health awareness campaigns, medical camps, and access to schemes."
+        text:
+          "Health awareness campaigns, medical camps, and access to schemes."
       },
       {
         title: "Legal Assistance",
-        text: "Providing free legal aid for land disputes and caste-based atrocities."
+        text:
+          "Providing free legal aid for land disputes and caste-based atrocities."
       }
     ]
   }
@@ -57,6 +67,9 @@ function About() {
   const currentSection = sections[sectionIndex];
   const cards = currentSection.cards;
 
+  const isObjectives = currentSection.sectionTitle === "Our Objectives";
+  const isSingle = cards.length === 1;
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (cardIndex < cards.length - 1) {
@@ -65,7 +78,7 @@ function About() {
         setSectionIndex((prev) => (prev + 1) % sections.length);
         setCardIndex(0);
       }
-    }, 4000);
+    }, 4500);
 
     return () => clearInterval(interval);
   }, [cardIndex, cards.length, sectionIndex]);
@@ -98,22 +111,28 @@ function About() {
       <h3 className="about-subtitle">{currentSection.sectionTitle}</h3>
 
       <div className="carousel-wrapper">
-        <button className="arrow left" onClick={prev}>‹</button>
+        <button className="arrow left" onClick={prev}>
+          ‹
+        </button>
 
         <div className="carousel">
           {cards.map((card, index) => {
-            const isSingle = cards.length === 1;
             const offset = index - cardIndex;
 
             return (
               <div
                 key={index}
-                className={`card ${isSingle ? "card-full" : ""}`}
+                className={`
+                  card
+                  ${isSingle ? "card-full" : ""}
+                  ${isObjectives ? "card-objective" : ""}
+                `}
                 style={
                   isSingle
                     ? {}
                     : {
-                        transform: `translateX(${offset * 520}px) scale(${index === cardIndex ? 1 : 0.9})`,
+                        transform: `translateX(${offset * (isObjectives ? 1000 : 520)}px) 
+                                    scale(${index === cardIndex ? 1 : 0.9})`,
                         filter: index === cardIndex ? "none" : "blur(2px)",
                         opacity: Math.abs(offset) > 1 ? 0 : 1,
                         zIndex: index === cardIndex ? 2 : 1
@@ -128,14 +147,16 @@ function About() {
                   />
                 )}
 
-                <h3>{card.title}</h3>
+                <h3 className="card-title-center">{card.title}</h3>
                 <p>{card.text}</p>
               </div>
             );
           })}
         </div>
 
-        <button className="arrow right" onClick={next}>›</button>
+        <button className="arrow right" onClick={next}>
+          ›
+        </button>
       </div>
     </section>
   );
