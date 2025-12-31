@@ -1,3 +1,7 @@
+/* =======================
+   ABOUT SECTION
+======================= */
+
 .about-section {
   position: relative;
   padding: 120px 32px;
@@ -8,18 +12,25 @@
   overflow: hidden;
 }
 
+/* Optional overlay if needed later */
 .about-overlay {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
 
+/* Ensure content is above background */
 .about-title,
 .about-subtitle,
-.carousel-wrapper {
+.carousel-wrapper,
+.objectives-section {
   position: relative;
   z-index: 1;
 }
+
+/* =======================
+   TITLES
+======================= */
 
 .about-title {
   text-align: center;
@@ -34,6 +45,10 @@
   color: #f57c00;
   margin-bottom: 40px;
 }
+
+/* =======================
+   CAROUSEL
+======================= */
 
 .carousel-wrapper {
   position: relative;
@@ -51,7 +66,10 @@
   height: 650px;
 }
 
-/* Base Card */
+/* =======================
+   CARDS
+======================= */
+
 .card {
   position: absolute;
   top: 50%;
@@ -66,7 +84,7 @@
   translate: -50% -50%;
 }
 
-/* Vision / Mission full card */
+/* Vision / Mission – Full Width */
 .card-full {
   width: 100%;
   max-width: 1350px;
@@ -77,14 +95,7 @@
   opacity: 1 !important;
 }
 
-/* 🔥 OBJECTIVES CARD – WIDER */
-.card-objective {
-  width: 1000px;
-  min-height: 540px;
-  padding: 30px 40px;
-}
-
-/* Image */
+/* Images inside cards */
 .card-image {
   width: 100%;
   height: 650px;
@@ -93,7 +104,7 @@
   margin-bottom: 22px;
 }
 
-/* Center title for objectives */
+/* Card titles */
 .card-title-center {
   text-align: center;
   font-size: 22px;
@@ -108,7 +119,10 @@
   text-align: center;
 }
 
-/* Arrows */
+/* =======================
+   ARROWS
+======================= */
+
 .arrow {
   position: absolute;
   top: 50%;
@@ -143,12 +157,109 @@
   box-shadow: 0 6px 18px rgba(245, 124, 0, 0.35);
 }
 
-/* Mobile */
-@media (max-width: 900px) {
-  .arrow.left {
-    left: -20px;
-  }
-  .arrow.right {
-    right: -20px;
-  }
+/* =======================
+   OBJECTIVES SECTION
+======================= */
+
+.objectives-section {
+  margin-top: 140px;
+  padding: 0 32px;
+}
+
+.objectives-title {
+  text-align: center;
+  font-size: 30px;
+  color: #d32f2f;
+  margin-bottom: 50px;
+  background-color: whitesmoke;
+  padding: 10px;
+  border: black 2px solid;
+  border-radius: 50px;
+}
+
+/* Grid layout */
+.objectives-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Objective card */
+/* Objective card base */
+.objective-card {
+  background: #ffffff;
+  padding: 24px 28px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: 
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.objective-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12);
+}
+
+/* Title row with arrow indicator */
+.objective-card h4 {
+  font-size: 18px;
+  color: #f57c00;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Arrow indicator */
+.objective-card h4::after {
+  content: "›";
+  font-size: 22px;
+  transform: rotate(0deg);
+  transition: transform 0.35s ease;
+}
+
+/* Rotate arrow when open */
+.objective-card.open h4::after {
+  transform: rotate(90deg);
+}
+
+/* Expanded background */
+.objective-card.open {
+  background: #fff3e0;
+}
+
+/* =======================
+   SMOOTH DROPDOWN CONTENT
+======================= */
+
+.objective-content {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-8px);
+  overflow: hidden;
+  transition:
+    max-height 0.45s ease,
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+/* Open state */
+.objective-content.open {
+  max-height: 200px; /* enough for 3–4 lines */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Text itself */
+.objective-text {
+  margin-top: 14px;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: #333;
 }

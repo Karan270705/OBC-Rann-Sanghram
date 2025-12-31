@@ -5,6 +5,7 @@ import About from "./sections/About";
 import Contact from "./sections/Contact";
 import Join from "./pages/Join";
 import Footer from "./components/Footer";
+import Team from "./sections/Team";
 function App() {
   // Simple routing without react-router (for now)
   const isJoinPage = window.location.pathname === "/join";
@@ -23,6 +24,7 @@ function App() {
       <Navbar />
       <Hero />
       <About />
+      <Team />
       <Contact />
       <ScrollToTop />
       <Footer />

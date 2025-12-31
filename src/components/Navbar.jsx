@@ -16,7 +16,19 @@ function Navbar() {
         ) : (
           <a href="#home">Home</a>
         )}
-        <a href="#about">About Us</a>
+
+        {/* About Us Dropdown */}
+        <div className="dropdown">
+  <span className="dropdown-toggle">
+    About Us <span className="caret">▾</span>
+  </span>
+  <div className="dropdown-menu">
+    <a href="#about">Our Work</a>
+    <a href="#team">Our Team</a>
+  </div>
+</div>
+
+
         <a href="#contact">Contact Us</a>
         <a href="/join" className="join-btn">Join Us</a>
       </div>

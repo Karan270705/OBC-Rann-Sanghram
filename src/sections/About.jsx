@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import "./About.css";
+
 import visionImage from "../assets/our_vision.jpeg";
 import missionImage from "../assets/our_mission.jpeg";
-import womenEmpowermentImage from "../assets/women.jpeg";
 
 const sections = [
   {
@@ -26,81 +26,70 @@ const sections = [
           "To protect OBC rights and work with government and society for holistic development."
       }
     ]
+  }
+];
+
+const objectives = [
+  {
+    title: "Protection of Constitutional & Reservation Rights",
+    text:
+      "To safeguard the constitutional rights and educational and employment reservations granted to the OBC community and ensure their effective implementation."
   },
   {
-    sectionTitle: "Our Objectives",
-    cards: [
-      {
-        title: "Women Empowerment",
-        image: womenEmpowermentImage,
-        text:
-          "Promoting education, health, leadership, and economic independence of women in the OBC community."
-      },
-      {
-        title: "Economic Empowerment",
-        text:
-          "Supporting entrepreneurship and access to government financial schemes."
-      },
-      {
-        title: "Educational Support",
-        text:
-          "Ensuring scholarships, hostels, skill development, and career guidance."
-      },
-      {
-        title: "Health & Welfare",
-        text:
-          "Health awareness campaigns, medical camps, and access to schemes."
-      },
-      {
-        title: "Legal Assistance",
-        text:
-          "Providing free legal aid for land disputes and caste-based atrocities."
-      }
-    ]
+    title: "Community Organization and Justice Advocacy",
+    text:
+      "To organize various OBC community groups, address their issues, and fight against social, economic, and cultural injustice."
+  },
+  {
+    title: "Educational and Skill Development Support",
+    text:
+      "To provide scholarships, hostel facilities, skill development programs, and career guidance to OBC students."
+  },
+  {
+    title: "Economic Empowerment and Entrepreneurship Development",
+    text:
+      "To promote economic empowerment by facilitating financial assistance through government schemes and encouraging entrepreneurship."
+  },
+  {
+    title: "Women Empowerment and Social Welfare",
+    text:
+      "To empower women through education, healthcare, financial independence, leadership opportunities, and overall social welfare initiatives."
+  },
+  {
+    title: "Legal Support, Awareness, and Collaboration",
+    text:
+      "To provide free legal assistance, prevent misuse such as fake certificates, raise awareness, and collaborate with social organizations and government bodies."
   }
 ];
 
 function About() {
   const [sectionIndex, setSectionIndex] = useState(0);
   const [cardIndex, setCardIndex] = useState(0);
+  const [openObjective, setOpenObjective] = useState(null);
 
   const currentSection = sections[sectionIndex];
   const cards = currentSection.cards;
-
-  const isObjectives = currentSection.sectionTitle === "Our Objectives";
   const isSingle = cards.length === 1;
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (cardIndex < cards.length - 1) {
-        setCardIndex((prev) => prev + 1);
-      } else {
-        setSectionIndex((prev) => (prev + 1) % sections.length);
-        setCardIndex(0);
-      }
+      setSectionIndex((prev) => (prev + 1) % sections.length);
+      setCardIndex(0);
     }, 4500);
 
     return () => clearInterval(interval);
-  }, [cardIndex, cards.length, sectionIndex]);
+  }, []);
 
   const prev = () => {
-    if (cardIndex > 0) {
-      setCardIndex(cardIndex - 1);
-    } else {
-      const prevSection =
-        sectionIndex === 0 ? sections.length - 1 : sectionIndex - 1;
-      setSectionIndex(prevSection);
-      setCardIndex(sections[prevSection].cards.length - 1);
-    }
+    setSectionIndex(
+      sectionIndex === 0 ? sections.length - 1 : sectionIndex - 1
+    );
+    setCardIndex(0);
   };
 
   const next = () => {
-    if (cardIndex < cards.length - 1) {
-      setCardIndex(cardIndex + 1);
-    } else {
-      setSectionIndex((sectionIndex + 1) % sections.length);
-      setCardIndex(0);
-    }
+    setSectionIndex((sectionIndex + 1) % sections.length);
+    setCardIndex(0);
   };
 
   return (
@@ -110,53 +99,47 @@ function About() {
       <h2 className="about-title">About Us</h2>
       <h3 className="about-subtitle">{currentSection.sectionTitle}</h3>
 
+      {/* ===== Vision & Mission Carousel ===== */}
       <div className="carousel-wrapper">
-        <button className="arrow left" onClick={prev}>
-          ‹
-        </button>
+        <button className="arrow left" onClick={prev}>‹</button>
 
         <div className="carousel">
-          {cards.map((card, index) => {
-            const offset = index - cardIndex;
-
-            return (
-              <div
-                key={index}
-                className={`
-                  card
-                  ${isSingle ? "card-full" : ""}
-                  ${isObjectives ? "card-objective" : ""}
-                `}
-                style={
-                  isSingle
-                    ? {}
-                    : {
-                        transform: `translateX(${offset * (isObjectives ? 1000 : 520)}px) 
-                                    scale(${index === cardIndex ? 1 : 0.9})`,
-                        filter: index === cardIndex ? "none" : "blur(2px)",
-                        opacity: Math.abs(offset) > 1 ? 0 : 1,
-                        zIndex: index === cardIndex ? 2 : 1
-                      }
-                }
-              >
-                {card.image && (
-                  <img
-                    src={card.image}
-                    alt={card.title}
-                    className="card-image"
-                  />
-                )}
-
-                <h3 className="card-title-center">{card.title}</h3>
-                <p>{card.text}</p>
-              </div>
-            );
-          })}
+          {cards.map((card, index) => (
+            <div key={index} className={`card card-full`}>
+              {card.image && (
+                <img src={card.image} alt={card.title} className="card-image" />
+              )}
+              <h3 className="card-title-center">{card.title}</h3>
+              <p>{card.text}</p>
+            </div>
+          ))}
         </div>
 
-        <button className="arrow right" onClick={next}>
-          ›
-        </button>
+        <button className="arrow right" onClick={next}>›</button>
+      </div>
+
+      {/* ===== Objectives Section (Appended Below) ===== */}
+      <div className="objectives-section">
+        <h3 className="objectives-title">Our Objectives</h3>
+
+        <div className="objectives-grid">
+          {objectives.map((obj, index) => (
+            <div
+              key={index}
+              className={`objective-card ${
+                openObjective === index ? "open" : ""
+              }`}
+              onClick={() =>
+                setOpenObjective(openObjective === index ? null : index)
+              }
+            >
+              <h4>{obj.title}</h4>
+              {openObjective === index && (
+                <p className="objective-text">{obj.text}</p>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
