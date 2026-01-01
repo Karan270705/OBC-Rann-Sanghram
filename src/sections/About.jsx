@@ -7,25 +7,21 @@ import missionImage from "../assets/our_mission.jpeg";
 const sections = [
   {
     sectionTitle: "Our Vision",
-    cards: [
-      {
-        title: "Protect Constitutional Rights",
-        image: visionImage,
-        text:
-          "Upholding the constitutional rights of the OBC community and ensuring justice, equality, and dignity for all."
-      }
-    ]
+    card: {
+      title: "Protect Constitutional Rights",
+      image: visionImage,
+      text:
+        "Upholding the constitutional rights of the OBC community and ensuring justice, equality, and dignity for all."
+    }
   },
   {
     sectionTitle: "Our Mission",
-    cards: [
-      {
-        title: "Our Mission",
-        image: missionImage,
-        text:
-          "To protect OBC rights and work with government and society for holistic development."
-      }
-    ]
+    card: {
+      title: "Our Mission",
+      image: missionImage,
+      text:
+        "To protect OBC rights and work with government and society for holistic development."
+    }
   }
 ];
 
@@ -33,110 +29,104 @@ const objectives = [
   {
     title: "Protection of Constitutional & Reservation Rights",
     text:
-      "To safeguard the constitutional rights and educational and employment reservations granted to the OBC community and ensure their effective implementation."
+      "To safeguard constitutional rights and educational and employment reservations granted to the OBC community."
   },
   {
     title: "Community Organization and Justice Advocacy",
     text:
-      "To organize various OBC community groups, address their issues, and fight against social, economic, and cultural injustice."
+      "To organize OBC groups and fight social, economic, and cultural injustice."
   },
   {
     title: "Educational and Skill Development Support",
     text:
-      "To provide scholarships, hostel facilities, skill development programs, and career guidance to OBC students."
+      "To provide scholarships, hostels, skill development, and career guidance."
   },
   {
-    title: "Economic Empowerment and Entrepreneurship Development",
+    title: "Economic Empowerment and Entrepreneurship",
     text:
-      "To promote economic empowerment by facilitating financial assistance through government schemes and encouraging entrepreneurship."
+      "To promote entrepreneurship and access to government financial schemes."
   },
   {
     title: "Women Empowerment and Social Welfare",
     text:
-      "To empower women through education, healthcare, financial independence, leadership opportunities, and overall social welfare initiatives."
+      "To empower women through education, health, leadership, and independence."
   },
   {
-    title: "Legal Support, Awareness, and Collaboration",
+    title: "Legal Support and Collaboration",
     text:
-      "To provide free legal assistance, prevent misuse such as fake certificates, raise awareness, and collaborate with social organizations and government bodies."
+      "To provide legal aid, prevent misuse, and collaborate with institutions."
   }
 ];
 
 function About() {
   const [sectionIndex, setSectionIndex] = useState(0);
-  const [cardIndex, setCardIndex] = useState(0);
   const [openObjective, setOpenObjective] = useState(null);
-
-  const currentSection = sections[sectionIndex];
-  const cards = currentSection.cards;
-  const isSingle = cards.length === 1;
 
   useEffect(() => {
     const interval = setInterval(() => {
       setSectionIndex((prev) => (prev + 1) % sections.length);
-      setCardIndex(0);
-    }, 4500);
-
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
-  const prev = () => {
-    setSectionIndex(
-      sectionIndex === 0 ? sections.length - 1 : sectionIndex - 1
-    );
-    setCardIndex(0);
-  };
-
-  const next = () => {
-    setSectionIndex((sectionIndex + 1) % sections.length);
-    setCardIndex(0);
-  };
+  const current = sections[sectionIndex];
 
   return (
     <section id="about" className="about-section">
-      <div className="about-overlay" />
-
       <h2 className="about-title">About Us</h2>
-      <h3 className="about-subtitle">{currentSection.sectionTitle}</h3>
 
-      {/* ===== Vision & Mission Carousel ===== */}
-      <div className="carousel-wrapper">
-        <button className="arrow left" onClick={prev}>‹</button>
-
-        <div className="carousel">
-          {cards.map((card, index) => (
-            <div key={index} className={`card card-full`}>
-              {card.image && (
-                <img src={card.image} alt={card.title} className="card-image" />
-              )}
-              <h3 className="card-title-center">{card.title}</h3>
-              <p>{card.text}</p>
-            </div>
-          ))}
-        </div>
-
-        <button className="arrow right" onClick={next}>›</button>
+      {/* OVERVIEW */}
+      <div className="about-overview">
+        <h3 className="overview-title">Who We Are</h3>
+        <p>
+          OBC Ransangram is a community-driven organization working for protection,
+          empowerment, and holistic development of the OBC community.
+        </p>
+        <p>
+          We function on constitutional values to ensure justice, equality,
+          education, economic progress, and political awareness.
+        </p>
       </div>
 
-      {/* ===== Objectives Section (Appended Below) ===== */}
+      {/* VISION / MISSION */}
+      <h3 className="about-subtitle">{current.sectionTitle}</h3>
+
+      <div className="vision-mission-container">
+        <div className="vision-card">
+          <img src={current.card.image} alt={current.card.title} />
+          <h4>{current.card.title}</h4>
+          <p>{current.card.text}</p>
+        </div>
+
+        <div className="vm-arrows">
+          <button onClick={() =>
+            setSectionIndex(sectionIndex === 0 ? sections.length - 1 : sectionIndex - 1)
+          }>
+            ‹
+          </button>
+          <button onClick={() =>
+            setSectionIndex((sectionIndex + 1) % sections.length)
+          }>
+            ›
+          </button>
+        </div>
+      </div>
+
+      {/* OBJECTIVES */}
       <div className="objectives-section">
-        <h3 className="objectives-title">Our Objectives</h3>
+        <div className="objectives-title-wrapper">
+          <h3 className="objectives-title">Our Objectives</h3>
+        </div>
 
         <div className="objectives-grid">
-          {objectives.map((obj, index) => (
+          {objectives.map((obj, i) => (
             <div
-              key={index}
-              className={`objective-card ${
-                openObjective === index ? "open" : ""
-              }`}
-              onClick={() =>
-                setOpenObjective(openObjective === index ? null : index)
-              }
+              key={i}
+              className={`objective-card ${openObjective === i ? "open" : ""}`}
+              onClick={() => setOpenObjective(openObjective === i ? null : i)}
             >
               <h4>{obj.title}</h4>
-              {openObjective === index && (
-                <p className="objective-text">{obj.text}</p>
-              )}
+              {openObjective === i && <p>{obj.text}</p>}
             </div>
           ))}
         </div>

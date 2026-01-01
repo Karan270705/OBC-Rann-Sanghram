@@ -1,5 +1,5 @@
 /* =======================
-   ABOUT SECTION
+   ABOUT SECTION (ROOT)
 ======================= */
 
 .about-section {
@@ -9,33 +9,35 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
-/* Optional overlay if needed later */
+/* Optional overlay */
 .about-overlay {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
 
-/* Ensure content is above background */
+/* Ensure content stays above bg */
 .about-title,
 .about-subtitle,
-.carousel-wrapper,
+.about-overview,
+.vision-mission-container,
 .objectives-section {
   position: relative;
   z-index: 1;
 }
 
 /* =======================
-   TITLES
+   MAIN TITLES
 ======================= */
 
 .about-title {
   text-align: center;
   font-size: 40px;
-  margin-bottom: 15px;
+  margin-bottom: 40px;
+  font-weight: 700;
 }
 
 .about-subtitle {
@@ -43,115 +45,99 @@
   font-size: 22px;
   font-weight: 600;
   color: #f57c00;
-  margin-bottom: 40px;
+  margin: 90px 0 35px;
 }
 
 /* =======================
-   CAROUSEL
+   ABOUT OVERVIEW
 ======================= */
 
-.carousel-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 80px;
-  padding-top: 50px;
-}
-
-.carousel {
-  position: relative;
-  width: 100%;
-  max-width: 1600px;
-  height: 650px;
-}
-
-/* =======================
-   CARDS
-======================= */
-
-.card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 520px;
-  min-height: 520px;
-  padding: 25px;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.14);
-  transition: transform 0.6s ease, filter 0.6s ease, opacity 0.6s ease;
-  translate: -50% -50%;
-}
-
-/* Vision / Mission – Full Width */
-.card-full {
-  width: 100%;
-  max-width: 1350px;
-  min-height: 580px;
-  padding: 40px 70px;
-  transform: none !important;
-  filter: none !important;
-  opacity: 1 !important;
-}
-
-/* Images inside cards */
-.card-image {
-  width: 100%;
-  height: 650px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 22px;
-}
-
-/* Card titles */
-.card-title-center {
+.about-overview {
+  max-width: 1200px;
+  margin: 0 auto 120px;
+  padding: 45px 55px;
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 20px;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.12);
   text-align: center;
-  font-size: 22px;
-  margin-bottom: 14px;
-  color: #d32f2f;
 }
 
-.card p {
-  font-size: 15.8px;
+.overview-title {
+  font-size: 30px;
+  color: #d32f2f;
+  margin-bottom: 26px;
+}
+
+.about-overview p {
+  font-size: 16.4px;
+  line-height: 1.75;
+  color: #333;
+  margin-bottom: 18px;
+}
+
+/* =======================
+   VISION / MISSION
+======================= */
+
+.vision-mission-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+ 
+}
+
+.vision-card {
+  background: #ffffff;
+  padding: 42px 48px;
+  border-radius: 20px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.14);
+}
+
+.vision-card img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 26px;
+}
+
+.vision-card h4 {
+  font-size: 26px;
+  color: #d32f2f;
+  margin-bottom: 12px;
+}
+
+.vision-card p {
+  font-size: 16px;
   line-height: 1.65;
   color: #333;
-  text-align: center;
 }
 
 /* =======================
-   ARROWS
+   VISION / MISSION ARROWS
 ======================= */
 
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 5;
-  width: 44px;
-  height: 44px;
+.vm-arrows {
+  margin-top: 26px;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.vm-arrows button {
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   background-color: #fffaf5;
   border: 2px solid #f57c00;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  font-weight: 600;
   color: #f57c00;
+  font-size: 24px;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.25s ease;
 }
 
-.arrow.left {
-  left: 20px;
-}
-
-.arrow.right {
-  right: 20px;
-}
-
-.arrow:hover {
+.vm-arrows button:hover {
   background-color: #f57c00;
   color: #ffffff;
   box-shadow: 0 6px 18px rgba(245, 124, 0, 0.35);
@@ -162,104 +148,107 @@
 ======================= */
 
 .objectives-section {
-  margin-top: 140px;
+  margin-top: 160px;
   padding: 0 32px;
 }
 
-.objectives-title {
+/* Center title PROPERLY */
+.objectives-title-wrapper {
   text-align: center;
-  font-size: 30px;
-  color: #d32f2f;
-  margin-bottom: 50px;
-  background-color: whitesmoke;
-  padding: 10px;
-  border: black 2px solid;
-  border-radius: 50px;
+  margin-bottom: 55px;
 }
 
-/* Grid layout */
+.objectives-title {
+  display: inline-block;
+  font-size: 30px;
+  color: #d32f2f;
+  background-color: whitesmoke;
+  padding: 12px 34px;
+  border: 2px solid #000;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+/* =======================
+   OBJECTIVES GRID
+======================= */
+
 .objectives-grid {
+  max-width: 1200px;
+  margin: auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 28px;
-  max-width: 1200px;
-  margin: auto;
 }
 
-/* Objective card */
-/* Objective card base */
+/* =======================
+   OBJECTIVE CARD
+======================= */
+
 .objective-card {
   background: #ffffff;
-  padding: 24px 28px;
+  padding: 26px 32px;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   cursor: pointer;
-  transition: 
+  transition:
     transform 0.3s ease,
     box-shadow 0.3s ease,
     background-color 0.3s ease;
-  position: relative;
-  overflow: hidden;
 }
 
 .objective-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
 }
 
-/* Title row with arrow indicator */
 .objective-card h4 {
   font-size: 18px;
   color: #f57c00;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 }
 
-/* Arrow indicator */
 .objective-card h4::after {
   content: "›";
   font-size: 22px;
-  transform: rotate(0deg);
   transition: transform 0.35s ease;
 }
 
-/* Rotate arrow when open */
 .objective-card.open h4::after {
   transform: rotate(90deg);
 }
 
-/* Expanded background */
 .objective-card.open {
   background: #fff3e0;
 }
 
-/* =======================
-   SMOOTH DROPDOWN CONTENT
-======================= */
-
-.objective-content {
-  max-height: 0;
-  opacity: 0;
-  transform: translateY(-8px);
-  overflow: hidden;
-  transition:
-    max-height 0.45s ease,
-    opacity 0.35s ease,
-    transform 0.35s ease;
-}
-
-/* Open state */
-.objective-content.open {
-  max-height: 200px; /* enough for 3–4 lines */
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Text itself */
-.objective-text {
+.objective-card p {
   margin-top: 14px;
   font-size: 15.5px;
   line-height: 1.65;
   color: #333;
+}
+
+/* =======================
+   RESPONSIVE
+======================= */
+
+@media (max-width: 900px) {
+  .about-overview {
+    padding: 32px 24px;
+  }
+
+  .vision-card {
+    padding: 30px 24px;
+  }
+
+  .vision-card img {
+    height: 260px;
+  }
+
+  .objectives-grid {
+    grid-template-columns: 1fr;
+  }
 }
