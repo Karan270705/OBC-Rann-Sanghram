@@ -79,12 +79,16 @@ function About() {
       <div className="about-overview">
         <h3 className="overview-title">Who We Are</h3>
         <p>
-          OBC Ransangram is a community-driven organization working for protection,
-          empowerment, and holistic development of the OBC community.
+          OBC Ransangram is a social and socio-political organization committed to the protection, empowerment, and holistic development of the Other Backward Classes (OBC) community. Rooted in constitutional values, we work continuously to advance the social, economic, educational, and political progress of OBC communities.
         </p>
         <p>
-          We function on constitutional values to ensure justice, equality,
-          education, economic progress, and political awareness.
+          The organization was founded with the objective of bringing together diverse sections of the OBC society to collectively address their challenges and stand firmly against injustice. We represent the interests of OBCs, Nomadic and De-notified Tribes, Alutedar, Balutedar, and Micro-OBC communities, striving to integrate them into the mainstream of social and national development.
+        </p>
+        <p>
+          The organization was founded with the objective of bringing together diverse sections of the OBC society to collectively address their challenges and stand firmly against injustice. We represent the interests of OBCs, Nomadic and De-notified Tribes, Alutedar, Balutedar, and Micro-OBC communities, striving to integrate them into the mainstream of social and national development.
+        </p>
+        <p>
+          Our vision is to empower the OBC community through equality, justice, and sustainable development, enabling leadership and participation across all sectors of society. Our mission focuses on safeguarding the rights of the OBC community while working in coordination with the government and society to ensure inclusive growth.
         </p>
       </div>
 
